@@ -1,0 +1,11 @@
+{
+  "name": "house-move-planner",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Browser-only planner for buying a new house and selling, renting or Airbnb-ing the current one.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "start": "python3 -m http.server 8000"
+  }
+}

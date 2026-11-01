@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>House Move Planner</title>
+  <meta name="description" content="Plan buying a new house and selling, renting or Airbnb-ing your current one. Everything stays in your browser.">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <h1>House Move Planner</h1>
+      <p class="sub">Buy the new house, then sell, rent or Airbnb the current one. Your numbers are saved only in this browser.</p>
+    </div>
+    <div class="header-actions">
+      <span class="save-state" id="save-state" aria-live="polite"></span>
+      <button type="button" class="btn" id="btn-export">Export file</button>
+      <label class="btn" for="file-import">Import file</label>
+      <input type="file" id="file-import" accept=".json,application/json" class="visually-hidden">
+      <button type="button" class="btn ghost" id="btn-reset">Reset to examples</button>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button role="tab" id="tab-btn-numbers" aria-controls="tab-numbers" data-tab="numbers"><span class="step">1</span> Our numbers</button>
+    <button role="tab" id="tab-btn-afford" aria-controls="tab-afford" data-tab="afford"><span class="step">2</span> Affordability</button>
+    <button role="tab" id="tab-btn-funding" aria-controls="tab-funding" data-tab="funding"><span class="step">3</span> Down payment</button>
+    <button role="tab" id="tab-btn-timing" aria-controls="tab-timing" data-tab="timing"><span class="step">4</span> Sale timing</button>
+    <button role="tab" id="tab-btn-keep" aria-controls="tab-keep" data-tab="keep"><span class="step">5</span> Keep vs sell</button>
+    <button role="tab" id="tab-btn-compare" aria-controls="tab-compare" data-tab="compare"><span class="step">6</span> Compare</button>
+  </nav>
+
+  <main>
+    <section class="tab-panel" id="tab-numbers" role="tabpanel" aria-labelledby="tab-btn-numbers">
+      <div class="intro">
+        <h2>Start with your numbers</h2>
+        <p>Every box is pre-filled with <strong>example Seattle-area numbers</strong>. Replace them with yours; every tab updates instantly.
+          Items marked <span class="verify-tag">verify</span> are tax rules or local rates worth confirming with your lender, agent or CPA.</p>
+      </div>
+      <div class="card-grid" data-groups="household,assets,current,new,selling,growth,taxes"></div>
+      <div class="card-grid" data-groups="reet" data-collapsed="true"></div>
+    </section>
+
+    <section class="tab-panel" id="tab-afford" role="tabpanel" aria-labelledby="tab-btn-afford" hidden>
+      <div class="split">
+        <aside class="side-inputs">
+          <div class="card-stack" data-fields="Quick adjust:newPrice,downPct,newRate"></div>
+          <div class="card-stack" data-groups="lender"></div>
+        </aside>
+        <div class="results" id="res-afford"></div>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="tab-funding" role="tabpanel" aria-labelledby="tab-btn-funding" hidden>
+      <div class="split">
+        <aside class="side-inputs">
+          <div class="card-stack" data-groups="funding"></div>
+          <div class="card-stack" data-fields="Your savings:gift,cashSavings,emergencyTarget,stockValue,stockBasis"></div>
+          <div class="card-stack" data-fields="Growth & tax:stockReturn,cashYield,fedLTCG,niit,waCgDeduction"></div>
+        </aside>
+        <div class="results" id="res-funding"></div>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="tab-timing" role="tabpanel" aria-labelledby="tab-btn-timing" hidden>
+      <div class="split">
+        <aside class="side-inputs">
+          <div class="card-stack" data-groups="timing"></div>
+          <div class="card-stack" data-fields="Quick adjust:curValue,newPrice,stockSold"></div>
+        </aside>
+        <div class="results" id="res-timing"></div>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="tab-keep" role="tabpanel" aria-labelledby="tab-btn-keep" hidden>
+      <div class="split">
+        <aside class="side-inputs">
+          <div class="card-stack" data-groups="ltr,str,rentalShared"></div>
+          <div class="card-stack" data-fields="Growth:appreciation,investReturn,inflation"></div>
+        </aside>
+        <div class="results" id="res-keep"></div>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="tab-compare" role="tabpanel" aria-labelledby="tab-btn-compare" hidden>
+      <div class="results wide" id="res-compare"></div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>For planning and discussion only, not financial, tax or legal advice. Tax rules, Seattle regulations and insurance pricing change. Confirm the items marked <span class="verify-tag">verify</span> with your lender, CPA, agent and insurer before deciding.</p>
+    <p>Privacy: this page has no server. Your inputs are saved in this browser’s local storage and in files you export. Nothing is sent anywhere.</p>
+  </footer>
+</body>
+</html>
